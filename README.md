@@ -5,7 +5,8 @@ Input file must start With Https:// or http://
 Output file is in out.txt
 
 Use:
-#python3 req2.2.py
+#python3 s3.py
+
 #enter filepath:
 
 
