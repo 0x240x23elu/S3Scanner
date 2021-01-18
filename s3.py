@@ -21,14 +21,13 @@ for line in Lines:
     ip = line.strip() 
     try:
         r = requests.get(ip+".s3.amazonaws.com", allow_redirects=True, verify=False)
-     
+        
 
         A = "AccessDenied" 
         B = "NoSuchKey"
         C = "NoSuchBucket"
-        D = "PermanentRedirect"
-        E = "200"
-        F = "ListBucketResult"
+        D = "ListBucketResult"
+        E = "PermanentRedirect"
         f = open('out.txt', 'a')
         if A in r.text:
                  print("Bucket Found: ", ip, ":", A)
@@ -48,18 +47,14 @@ for line in Lines:
                  f.writelines(L)
                  f.close()
         elif D in r.text:
-                 print(D, ":", ip)
-                 L = [D, ":", ip, '\n']
+                 print("Bucket Found: ",D, ":", ip)
+                 L = ["Bucket Found: ",D, ":", ip, '\n']
                  f.writelines(L)
                  f.close()
-        elif E in r.status_code:
-                 print("Bucket Found: ", ip, ":", D)
-                 L = ["Bucket Found: ", ip, ":", D, '\n']
-                 f.writelines(L)
-                 f.close()
-        elif F in r.text:
-                 print("Bucket Found: ", ip, ":", F)
-                 L = ["Bucket Found: ", ip, ":", F, '\n']
+        
+        elif E in r.text:
+                 print("Bucket does not exist: ", ip, ":", F)
+                 L = ["Bucket does not exist: ", ip, ":", F, '\n']
                  f.writelines(L)
                  f.close()
         else:
@@ -72,4 +67,4 @@ for line in Lines:
         # A serious problem happened, like an SSLError or InvalidURL
         print("Error: {}".format(e))
                 
-                 
+                
